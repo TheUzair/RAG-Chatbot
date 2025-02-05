@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "apt-get update && apt-get install -y chromium && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
