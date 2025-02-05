@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# RAG-Based Chatbot
 
-## Getting Started
+## 🚀 Overview
+This project is a **Retrieval-Augmented Generation (RAG) chatbot** built with **Next.js 15+ (App Router), Groq API, Weaviate vector database, Puppeteer, and Redux for state management**. The chatbot scrapes content from user-provided URLs, stores it in a vector database, and generates intelligent responses with real-time citations.
 
-First, run the development server:
+## 🎯 Features
+- **RAG Architecture**: Enhances chatbot responses with relevant retrieved content.
+- **Source Citations**: Displays clickable links to the original sources.
+- **Real-Time Scraping**: Uses Puppeteer for web scraping.
+- **Weaviate for Vector Storage**: Efficient storage and retrieval of knowledge.
+- **Groq API for AI Responses**: Generates accurate, context-aware responses.
+- **Redux for State Management**: Handles chat history efficiently.
+- **Next.js App Router**: Optimized for server-side and client-side rendering.
 
+## 🛠️ Tech Stack
+- **Frontend**: Next.js 15+, React, Tailwind CSS, Redux
+- **Backend**: Node.js, Express, Puppeteer, Weaviate, Groq API
+- **Database**: Weaviate (vector storage)
+- **Deployment**: Render
+
+## 📦 Installation
+### 1️⃣ Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/TheUzair/RAG-Chatbot.git
+cd rag-chatbot
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2️⃣ Install Dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 3️⃣ Set Up Environment Variables
+Create a `.env.local` file and add:
+```env
+GROQ_API_KEY=your-groq-api-key
+WEAVIATE_URL=your-weaviate-instance-url
+WEAVIATE_API_KEY=your-weaviate-api-key
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4️⃣ Run the Application
+```bash
+npm run dev
+```
+Access the chatbot at `http://localhost:3000`.
 
-## Learn More
+## 🔧 How It Works
+### 1️⃣ Scraping a Website
+- User enters a URL.
+- Puppeteer extracts text content.
+- Data is stored in Weaviate as vector embeddings.
 
-To learn more about Next.js, take a look at the following resources:
+### 2️⃣ Query Processing
+- User asks a question.
+- Weaviate retrieves the most relevant content.
+- Groq API generates a response using both retrieved and general knowledge.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3️⃣ Response Display
+- The chatbot displays the response.
+- If a source is available, a clickable citation is shown.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 💬 Example Responses
+### ✅ Example 1: Factual Query
+**User:** *"What is quantum computing?"*
+**Bot:** *"Quantum computing uses quantum bits (qubits) to perform computations that classical computers struggle with. [Click here](https://example.com/quantum-computing) to read more."*
 
-## Deploy on Vercel
+### ✅ Example 2: Context-Aware Query
+**User:** *"Summarize the main points of this article."*
+**Bot:** *"The article discusses the latest AI trends, focusing on ethical concerns and advancements. [Click here](https://example.com/ai-trends) for details."*
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛑 Edge Cases
+### ✅ Handled Cases
+- **Empty Queries**: Prevents sending blank messages.
+- **Invalid URLs**: Displays an error if an incorrect URL is entered.
+- **Slow Responses**: Shows a loading indicator while fetching results.
+- **Rate Limits**: Implements retry mechanisms.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### ❌ Unhandled Cases
+- **JavaScript-Rendered Pages**: If content is hidden behind client-side rendering, Puppeteer may not capture it.
+- **Highly Dynamic Content**: Pages that change frequently may lead to outdated embeddings.
+- **Multimodal Inputs**: Currently, only text-based queries are supported.
+
+## 📌 Future Enhancements
+- ✅ Add support for multimedia content retrieval (images, videos).
+- ✅ Improve citation handling with multiple source references.
+- ✅ Enhance multi-turn conversations.
+- ✅ Expand language support for global users.
+
+## 🤝 Contributing
+Pull requests are welcome! Feel free to fork the repo and submit your contributions.
+
+## 📄 License
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+
+---
