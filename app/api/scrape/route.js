@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium";
 import { NextResponse } from "next/server";
 import weaviateClient from "@/app/lib/weaviateClient";
 
@@ -12,11 +13,23 @@ export async function POST(req) {
 
         console.log(`Launching Puppeteer to scrape: ${url}`);
 
-        const browser = await puppeteer.launch({
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || "/usr/bin/chromium",
-            headless: "new",
-            args: ["--no-sandbox", "--disable-setuid-sandbox"],
-        });
+        let browser;
+
+        if (process.env.VERCEL) {
+            console.log("Running on Vercel with @sparticuz/chromium");
+            browser = await puppeteer.launch({
+                args: chromium.args,
+                executablePath: await chromium.executablePath(),
+                headless: chromium.headless,
+            });
+        } else {
+            console.log("Running locally with installed Puppeteer");
+            browser = await puppeteer.launch({
+                executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || "/usr/bin/chromium",
+                headless: "new",
+                args: ["--no-sandbox", "--disable-setuid-sandbox"],
+            });
+        }
 
         const page = await browser.newPage();
         await page.goto(url, { waitUntil: "networkidle2" });
@@ -39,6 +52,7 @@ export async function POST(req) {
             .do();
 
         console.log("Content stored successfully");
+
         return NextResponse.json({ message: "Scraped and stored successfully", text });
     } catch (error) {
         console.error("Error scraping or storing data:", error.message);
