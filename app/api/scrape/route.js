@@ -13,7 +13,7 @@ export async function POST(req) {
         console.log(`Launching Puppeteer to scrape: ${url}`);
 
         const browser = await puppeteer.launch({
-            executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || "/usr/bin/chromium",
             headless: "new",
             args: ["--no-sandbox", "--disable-setuid-sandbox"],
         });
