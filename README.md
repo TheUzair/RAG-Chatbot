@@ -16,7 +16,10 @@ This project is a **Retrieval-Augmented Generation (RAG) chatbot** built with **
 - **Frontend**: Next.js 15+, React, Tailwind CSS, Redux
 - **Backend**: Node.js, Express, Puppeteer, Weaviate, Groq API
 - **Database**: Weaviate (vector storage)
-- **Deployment**: Render
+- **Deployment**: Vecerl
+
+## Deployment
+- **Live Website**: [https://rag-chatbot-eta.vercel.app](https://rag-chatbot-eta.vercel.app)
 
 ## 📦 Installation
 ### 1️⃣ Clone the Repository

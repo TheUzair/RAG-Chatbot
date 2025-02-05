@@ -16,7 +16,6 @@ export async function POST(req) {
     let browser;
 
     if (process.env.VERCEL) {
-      // Running on Vercel → Use @sparticuz/chromium
       console.log("Running on Vercel with @sparticuz/chromium");
       browser = await puppeteer.launch({
         args: chromium.args,
@@ -24,7 +23,6 @@ export async function POST(req) {
         headless: chromium.headless,
       });
     } else {
-      // Running locally → Use installed Puppeteer
       console.log("Running locally with installed Puppeteer");
       browser = await puppeteer.launch({
         headless: "new",

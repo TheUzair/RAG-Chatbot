@@ -22,7 +22,7 @@ export const metadata = {
     title: "AI-Powered RAG Chatbot | Smart Knowledge Retrieval",
     description: "An advanced chatbot that retrieves and generates precise answers with source citations using RAG technology.",
     type: "website",
-    url: "",
+    url: "https://rag-chatbot-eta.vercel.app",
     image: "/og-image.jpg",
   },
 };
