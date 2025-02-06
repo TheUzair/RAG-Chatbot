@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/*.js": {
+    "app/api/scrape/route.js": {
       "includeFiles": "node_modules/@sparticuz/chromium-min/**"
     }
   }
