@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer-core";
+import puppeteer from "puppeteer";
 import chromium from "@sparticuz/chromium-min";
 import { NextResponse } from "next/server";
 import weaviateClient from "@/app/lib/weaviateClient";
@@ -15,15 +15,17 @@ export async function POST(req) {
 
     let browser;
     const puppeteerConfig = {
-      args: [...chromium.args, "--no-sandbox", "--disable-setuid-sandbox"],
-      headless: chromium.headless,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      headless: true,
     };
 
     if (process.env.VERCEL) {
       console.log("Running on Vercel with @sparticuz/chromium-min");
-      puppeteerConfig.executablePath = await chromium.executablePath() || "/usr/bin/chromium";
+      puppeteerConfig.args = chromium.args;
+      puppeteerConfig.headless = chromium.headless;
+      puppeteerConfig.executablePath = (await chromium.executablePath()) || "/usr/bin/chromium";
     } else {
-      console.log("Running locally with Chrome");
+      console.log("Running locally with full Puppeteer");
       puppeteerConfig.executablePath =
         process.env.PUPPETEER_EXECUTABLE_PATH ||
         "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
@@ -51,7 +53,6 @@ export async function POST(req) {
       .withProperties({
         url,
         text,
-        scrapedAt: new Date().toISOString(),
       })
       .do();
 

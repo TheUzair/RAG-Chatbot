@@ -1,7 +1,7 @@
 {
   "functions": {
-    "app/api/scrape/route.js": {
-      "includeFiles": "node_modules/@sparticuz/chromium-min/**"
+    "app/api/scrape/route": {
+      "includeFiles": "node_modules/puppeteer/**"
     }
   }
 }
