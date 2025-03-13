@@ -18,9 +18,6 @@ This project is a **Retrieval-Augmented Generation (RAG) chatbot** built with **
 - **Database**: Weaviate (vector storage)
 - **Deployment**: Vecerl
 
-## Deployment
-- **Live Website**: [https://rag-chatbot-eta.vercel.app](https://rag-chatbot-eta.vercel.app)
-
 ## 📦 Installation
 ### 1️⃣ Clone the Repository
 ```bash

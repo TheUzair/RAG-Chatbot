@@ -59,11 +59,6 @@ export default function URLInput() {
         </button>
       </div>
       {error && <p className="text-red-500 mt-2">{error}</p>}
-      {websiteName && (
-        <p className="text-green-500 mt-2">
-          ✅ <strong>{websiteName}</strong> has been scraped successfully!
-        </p>
-      )}
     </div>
   );
 }
